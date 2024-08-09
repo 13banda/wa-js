@@ -14,17 +14,4 @@
  * limitations under the License.
  */
 
-import { exportModule } from '../exportModule';
-
-/**
- * @whatsapp 525438
- */
-export declare function isLegitErrorStack(): boolean;
-
-exportModule(
-  exports,
-  {
-    isLegitErrorStack: 'isLegitErrorStack',
-  },
-  (m) => m.isLegitErrorStack
-);
+export * from './functions/';
