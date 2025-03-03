@@ -1,5 +1,5 @@
 /*!
- * Copyright 2023 WPPConnect Team
+ * Copyright 2021 WPPConnect Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,21 @@
  */
 
 import { exportModule } from '../exportModule';
-import { Wid } from '../misc';
 
 /**
- * @whatsapp 355813
+ * @whatsapp WAWebCreateChat >= 2.3000.0
  */
-export declare function GROUP_JID(jid: Wid): any;
-export declare function CHAT_JID(jid: Wid): any;
+export declare function createChat(
+  chatParams: any,
+  context: any,
+  options: any,
+  extra: any
+): Promise<any>;
 
 exportModule(
   exports,
   {
-    GROUP_JID: 'GROUP_JID',
-    CHAT_JID: 'CHAT_JID',
+    createChat: 'createChat',
   },
-  (m) => m.GROUP_JID && m.CHAT_JID
+  (m) => m.createChat
 );

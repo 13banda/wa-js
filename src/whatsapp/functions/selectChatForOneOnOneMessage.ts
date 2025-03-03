@@ -1,5 +1,5 @@
 /*!
- * Copyright 2023 WPPConnect Team
+ * Copyright 2025 WPPConnect Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,16 @@
  */
 
 import { exportModule } from '../exportModule';
-import { Wid } from '../misc';
 
 /**
- * @whatsapp 355813
+ * @whatsapp 973480 >= 2.2241.6
  */
-export declare function GROUP_JID(jid: Wid): any;
-export declare function CHAT_JID(jid: Wid): any;
+export declare function selectChatForOneOnOneMessage(params: any): Promise<any>;
 
 exportModule(
   exports,
   {
-    GROUP_JID: 'GROUP_JID',
-    CHAT_JID: 'CHAT_JID',
+    selectChatForOneOnOneMessage: 'selectChatForOneOnOneMessage',
   },
-  (m) => m.GROUP_JID && m.CHAT_JID
+  (m) => m.selectChatForOneOnOneMessage
 );

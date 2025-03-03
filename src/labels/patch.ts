@@ -1,5 +1,5 @@
 /*!
- * Copyright 2023 WPPConnect Team
+ * Copyright 2025 WPPConnect Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-import { exportModule } from '../exportModule';
-import { Wid } from '../misc';
+import { ChatStore, LabelModel } from '../whatsapp';
 
-/**
- * @whatsapp 355813
- */
-export declare function GROUP_JID(jid: Wid): any;
-export declare function CHAT_JID(jid: Wid): any;
+// Fix for an error that included archived chats in the total count
+// Archived chats should not be counted since they do not appear in WhatsApp
+export function patchLabelCount(label: LabelModel): number {
+  let count = 0;
+  for (const item of (label as any).labelItemCollection._models) {
+    if (item.parentType !== 'Chat') continue;
 
-exportModule(
-  exports,
-  {
-    GROUP_JID: 'GROUP_JID',
-    CHAT_JID: 'CHAT_JID',
-  },
-  (m) => m.GROUP_JID && m.CHAT_JID
-);
+    const chat = ChatStore.get(item.parentId);
+    if (!chat?.archive) count += 1;
+  }
+  return count;
+}
