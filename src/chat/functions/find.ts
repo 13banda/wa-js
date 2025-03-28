@@ -1,5 +1,5 @@
 /*!
- * Copyright 2021 WPPConnect Team
+ * Copyright 2025 WPPConnect Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 import { assertWid } from '../../assert';
 import { ChatModel, GroupMetadataStore, Wid } from '../../whatsapp';
-import { findChat } from '../../whatsapp/functions';
+import { findOrCreateLatestChat } from '../../whatsapp/functions';
 
 /**
  * Find a chat by id
@@ -27,11 +27,11 @@ import { findChat } from '../../whatsapp/functions';
  */
 export async function find(chatId: string | Wid): Promise<ChatModel> {
   const wid = assertWid(chatId);
-  const chat = await findChat(wid);
+  const exist = await findOrCreateLatestChat(wid);
 
-  if (chat.isGroup) {
-    await GroupMetadataStore.find(chat.id);
+  if (!wid.isLid() && wid.isGroup() && exist.chat) {
+    await GroupMetadataStore.find(exist.chat.id);
   }
 
-  return chat;
+  return exist.chat;
 }
