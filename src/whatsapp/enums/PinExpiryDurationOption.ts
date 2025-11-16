@@ -1,5 +1,5 @@
 /*!
- * Copyright 2021 WPPConnect Team
+ * Copyright 2025 WPPConnect Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,22 +16,21 @@
 
 import { exportModule } from '../exportModule';
 
-/**
- * @whatsapp WAWebCreateChat >= 2.3000.0
- * findChat internally uses this function to create a new chat
- * to create a chat use Chat.findChat(wid) instead
+/** @whatsapp WAWebPinMsgConstants >= 2.3000.1029839609
  */
-export declare function createChat(
-  chatParams: any,
-  context: any,
-  options: any,
-  extra: any
-): Promise<any>;
+export declare enum PinExpiryDurationOption {
+  FiveSeconds = 'FiveSeconds',
+  FifteenSeconds = 'FifteenSeconds',
+  OneMinute = 'OneMinute',
+  OneDay = 'OneDay',
+  SevenDays = 'SevenDays',
+  ThirtyDays = 'ThirtyDays',
+}
 
 exportModule(
   exports,
   {
-    createChat: 'createChat',
+    PinExpiryDurationOption: 'PinExpiryDurationOption',
   },
-  (m) => m.createChat
+  (m) => m.PinExpiryDurationOption
 );
